@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naveenkumar Narsozhan | AI & NLP Portfolio</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <canvas id="magic-cursor"></canvas>
+
+    <!-- Navigation -->
+    <nav class="arcane-nav">
+        <div class="nav-logo"></div>
+        <ul class="nav-links">
+            <li><a href="#about" class="target-nav-link" data-hover="About">About</a></li>
+            <li><a href="#education" class="target-nav-link" data-hover="Education">Education</a></li>
+            <li><a href="#experience" class="target-nav-link" data-hover="Experience">Experience</a></li>
+            <li><a href="#projects" class="target-nav-link" data-hover="Projects">Projects</a></li>
+            <li><a href="#assistant" class="target-nav-link" data-hover="Chat AI">Assistant</a></li>
+            <li><a href="#contact" class="target-nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 class="glow-text">Naveenkumar Narsozhan</h1>
+            <p class="subtitle">MS in Computer Science @ USC | B.Tech @ NIT Puducherry</p>
+            <div class="hero-divider"></div>
+            <p class="tagline">Turning data into intelligent systems | AI, NLP, & Deep Learning</p>
+            <div class="cta-group">
+                <a href="#projects" class="btn btn-primary">View Spellbook</a>
+                <a href="#assistant" class="btn btn-secondary">Ask My AI</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span class="mouse">
+                <span class="wheel"></span>
+            </span>
+            <span class="arrow"></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-container">
+        <section id="about" class="section-container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        I am a graduate student at the <strong>University of Southern California</strong> (Class of
+                        2027),
+                        pursuing my Master's in Computer Science. My path began at <strong>NIT Puducherry</strong>,
+                        where I
+                        graduated with a 9.3 CGPA.
+                    </p>
+                    <p>
+                        My "magic" lies in <strong>Artificial Intelligence</strong> and <strong>Machine
+                            Learning</strong>.
+                        From creating RAG-based chatbots to designing GANs for map translation, I explore the frontiers
+                        where code meets cognition.
+                    </p>
+                    <div class="skills-grid-container">
+                        <strong>Programming:</strong> Python, C, C++, C#, MS-SQL<br>
+                        <strong>Python Modules:</strong> PyTorch, TensorFlow, Transformers, Scikit-learn, Spacy, NLTK
+                    </div>
+                    <ul class="skills-list">
+                        <li><i class="fas fa-brain"></i> Deep Learning</li>
+                        <li><i class="fas fa-robot"></i> RAG & LLMs</li>
+                        <li><i class="fas fa-eye"></i> Computer Vision</li>
+                        <li><i class="fas fa-cloud"></i> Azure Cloud</li>
+                    </ul>
+                </div>
+                <div class="about-visual">
+                    <div class="profile-container">
+                        <img src="assets/profile.png" alt="Naveenkumar Narsozhan" class="profile-img">
+                        <div class="rune-circle-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section-container">
+            <h2 class="section-title">Education</h2>
+            <div class="projects-grid">
+                <!-- USC -->
+                <div class="project-card">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: var(--bg-tertiary);">
+                            <div class="achievement-icon" style="margin-bottom: 1rem;"><i class="fas fa-university"></i>
+                            </div>
+                            <h3 style="font-size: 1.5rem;">University of Southern California</h3>
+                            <p class="exp-role">Masters in Computer Science</p>
+                            <p class="exp-location"
+                                style="margin-top: 0.5rem; color: var(--text-primary); font-weight: bold;">CGPA: 3.65 /
+                                4.0</p>
+                            <p class="exp-location">Class of 2027</p>
+                        </div>
+                        <div class="card-back">
+                            <h3>Coursework</h3>
+                            <div class="tech-stack" style="margin-top: 1rem; gap: 0.8rem;">
+                                <!-- Reusing tech-stack for pill design -->
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Analysis of Algorithms</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Information Retrieval</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Deep Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NIT -->
+                <div class="project-card">
+                    <div class="card-inner">
+                        <div class="card-front" style="background: var(--bg-tertiary);">
+                            <div class="achievement-icon" style="margin-bottom: 1rem;"><i
+                                    class="fas fa-graduation-cap"></i></div>
+                            <h3 style="font-size: 1.5rem;">National Institute of Technology Puducherry</h3>
+                            <p class="exp-role">B.Tech in Computer Science and Engineering</p>
+                            <p class="exp-location"
+                                style="margin-top: 0.5rem; color: var(--text-primary); font-weight: bold;">CGPA: 9.3 /
+                                10</p>
+                            <p class="exp-location">Graduated 2024</p>
+                        </div>
+                        <div class="card-back">
+                            <h3>Coursework</h3>
+                            <div class="tech-stack" style="margin-top: 1rem; gap: 0.8rem;">
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Artificial Intelligence and
+                                    Expert Systems</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Machine Learning</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Deep Learning</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Soft Computing Techniques</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Pattern Recognition</span>
+                                <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Big Data Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section (New) -->
+        <section id="experience" class="section-container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="experience-timeline">
+                <!-- HCL Tech -->
+                <div class="experience-card achievement-card">
+                    <div class="exp-header">
+                        <h3>HCL Tech</h3>
+                        <span class="exp-role">Technical Lead | Sep 2024 - July 2025</span>
+                    </div>
+                    <p class="exp-location">Madurai, Tamil Nadu</p>
+                    <ul class="exp-details">
+                        <li>Completed full-stack training in Microsoft ecosystem (C#, .NET, Angular, SQL Server).</li>
+                        <li>Trained in Azure services (App Service, SQL Database, DevOps) and cloud migration.</li>
+                        <li>Migrated legacy corporate website (50K+ users) to Azure, reducing costs by 20%.</li>
+                    </ul>
+                </div>
+
+                <!-- NIOT -->
+                <div class="experience-card achievement-card" style="margin-top: 2rem;">
+                    <div class="exp-header">
+                        <h3>National Institute of Ocean Technology (NIOT)</h3>
+                        <span class="exp-role">ML Research Intern | May 2023 - June 2023</span>
+                    </div>
+                    <p class="exp-location">Chennai, India</p>
+                    <ul class="exp-details">
+                        <li>Performed EDA on 1M+ meteorological data points to study ship fuel efficiency.</li>
+                        <li>Developed robust data preprocessing pipeline (CSV -> Excel, normalization).</li>
+                        <li>Analyzed ship trajectory data for optimal maritime navigation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section-container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+
+                <!-- Valorant Strategy Assistant -->
+                <div class="project-card" data-tilt>
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Valorant RAG Chatbot</h3>
+                            <p class="card-tech">RAG • LLM • ChromaDB</p>
+                        </div>
+                        <div class="card-back">
+                            <h3>Valorant Strategy Assistant</h3>
+                            <p>Retreival-Augmented Generation system using sentence-transformers and ChromaDB. Indexed
+                                50+
+                                docs for context-aware Q&A.</p>
+                            <div class="tech-stack">
+                                <span>Mistral 7B</span><span>RAG</span><span>Python</span>
+                            </div>
+                            <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Scroll
+                                <i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aerial Image to Map -->
+                <div class="project-card" data-tilt>
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>Pix2Pix Maps</h3>
+                            <p class="card-tech">GAN • Computer Vision</p>
+                        </div>
+                        <div class="card-back">
+                            <h3>Aerial Image to Map</h3>
+                            <p>Implemented conditional GAN (Pix2Pix) to translate aerial imagery into cartographic maps.
+                                Validated with high-fidelity outputs.</p>
+                            <div class="tech-stack">
+                                <span>PyTorch/TF</span><span>GANs</span><span>CV</span>
+                            </div>
+                            <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Scroll
+                                <i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COVID-19 Classification -->
+                <div class="project-card" data-tilt>
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>X-Ray Vision</h3>
+                            <p class="card-tech">CNN • Medical Imaging</p>
+                        </div>
+                        <div class="card-back">
+                            <h3>COVID-19 Classification</h3>
+                            <p>Two-stage CNN pipeline for chest X-rays. Achieved 91% accuracy (Normal vs Abnormal) and
+                                96%
+                                (Disease specificity).</p>
+                            <div class="tech-stack">
+                                <span>CNN</span><span>Keras</span><span>Python</span>
+                            </div>
+                            <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Scroll
+                                <i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="assistant" class="section-container">
+            <h2 class="section-title">AI Assistant</h2>
+            <div class="chat-interface-container">
+                <div class="chat-window" id="chat-window">
+                    <div class="chat-message bot-message">
+                        Greetings. I am the digital construct of Naveenkumar. Ask me about my research at USC, my time
+                        at
+                        NIOT, or my mastery of the Azure Cloud.
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Ask a question..." autocomplete="off">
+                    <button id="send-btn"><i class="fas fa-wand-magic-sparkles"></i></button>
+                </div>
+                <div class="example-prompts">
+                    <span class="prompt-chip">"Tell me about NIOT"</span>
+                    <span class="prompt-chip">"What is the Valorant bot?"</span>
+                    <span class="prompt-chip">"List your skills"</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & Footer -->
+        <footer id="contact">
+            <div class="footer-content">
+                <h2>Start a Conversation</h2>
+                <p>"The most powerful magic is understanding."</p>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">(213) 796-2976</p>
+
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/naveenkumar-narsozhan" target="_blank" class="social-btn"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Naveenkumar0105" target="_blank" class="social-btn"><i
+                            class="fab fa-github"></i></a>
+                    <a href="mailto:narsozha@usc.edu" class="social-btn"><i class="fas fa-envelope"></i></a>
+                </div>
+
+                <a href="assets/resume.pdf" class="download-resume" download>
+                    <i class="fas fa-file-pdf"></i> Download Resume Scroll
+                </a>
+
+                <div class="copyright">
+                    &copy; 2025 Naveenkumar Narsozhan.
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="js/particles.js"></script>
+        <script src="js/magic.js"></script>
+        <script src="js/chat.js"></script>
+        <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Palette Preview: Arcane Formal</title>
+    <style>
+        :root {
+            /* Copied directly from the new style.css */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #e9ecef;
+            --bg-tertiary: #ffffff;
+            --accent-gold: #b08d55;
+            --accent-gold-dim: #d4af37;
+            --accent-primary: #1a252f;
+            --accent-primary-light: #2c3e50;
+            --text-primary: #1a252f;
+            --text-secondary: #546e7a;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+        }
+
+        .swatch {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navy {
+            background: var(--accent-primary);
+        }
+
+        .gold {
+            background: var(--accent-gold);
+        }
+
+        .white {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid #ccc;
+        }
+
+        .slate {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="grid-column: 1/-1; text-align: center;">
+            <h1>Arcane Formal Palette</h1>
+            <p>Deep Navy & Antique Gold</p>
+        </div>
+        <div class="swatch navy">Navy<br>#1a252f</div>
+        <div class="swatch gold">Gold<br>#b08d55</div>
+        <div class="swatch white">White<br>#ffffff</div>
+    </div>
+</body>
+
+</html>
