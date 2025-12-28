@@ -1,8 +1,12 @@
 /* Particles.js Configuration for "Magical Ether" */
+/* Dynamic Particle Count for Mobile */
+const isMobile = window.innerWidth < 768;
+const particleCount = isMobile ? 12 : 30; // Reduce to 12 on mobile, 30 on desktop
+
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 30, /* Significantly reduced for readability */
+      "value": particleCount,
       "density": {
         "enable": true,
         "value_area": 800
