@@ -309,44 +309,70 @@ h3 {
 .profile-container {
     position: relative;
     width: 450px;
-    height: 450px;
+    max-width: 100%;
+    /* Prevent overflow */
+    aspect-ratio: 1 / 1;
+    /* Crucial: maintain square shape */
     margin: 0 auto;
+    display: grid;
+    place-items: center;
+    overflow: visible;
 }
 
 .profile-img {
+    grid-area: 1 / 1;
     width: 100%;
     height: 100%;
+    aspect-ratio: 1 / 1;
+    /* Double insurance for square shape */
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--accent-gold-dim);
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .rune-circle-overlay {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 490px;
-    height: 490px;
-    border: 1px solid var(--accent-primary);
+    grid-area: 1 / 1;
+    width: 145%;
+    height: 145%;
     border-radius: 50%;
-    animation: spin 60s linear infinite;
-    z-index: 0;
-    opacity: 0.5;
+    z-index: 3;
+    /* ABOVE image so rings are visible */
+    pointer-events: none;
+    position: relative;
+    /* Context for pseudo-elements */
 }
 
+/* Outer Gold Orbit */
+.rune-circle-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* Fill container */
+    border-radius: 50%;
+    border: 2px solid rgba(176, 141, 85, 0.7);
+    /* Faint Gold Ring */
+    /* A single glowing "electron" on the ring */
+    box-shadow: 0 0 20px rgba(176, 141, 85, 0.6);
+    /* Stronger Glow */
+    animation: spin 30s linear infinite;
+}
+
+/* Inner Navy Orbit */
 .rune-circle-overlay::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 510px;
-    height: 510px;
-    border: 1px dashed var(--accent-gold);
+    inset: 10%;
+    /* Gap between rings */
     border-radius: 50%;
-    transform: translate(-50%, -50%);
+    border: 2px solid rgba(44, 62, 80, 0.85);
+    /* Faint Navy Ring */
+    /* A single glowing "electron" on the ring */
+    box-shadow: 0 0 20px rgba(44, 62, 80, 0.6);
+    /* Stronger Glow */
+    animation: spin-reverse 20s linear infinite;
 }
 
 @keyframes spin {
@@ -356,6 +382,16 @@ h3 {
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes spin-reverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
     }
 }
 
@@ -826,39 +862,13 @@ footer {
         text-align: center;
     }
 
-    .rune-circle {
-        margin-top: 2rem;
-        width: 200px;
-        height: 200px;
-    }
-
-    .rune-circle::before {
-        width: 140px;
-        height: 140px;
-    }
-
-    .rune-circle::after {
-        width: 100px;
-        height: 100px;
-    }
-
     .profile-container {
         width: 200px;
-        height: 200px;
+        /* Height auto + aspect-ratio from main CSS handles the circle shape */
         margin-top: 2rem;
     }
 
-    .rune-circle-overlay {
-        width: 220px;
-        height: 220px;
-        top: -10px;
-        left: -10px;
-    }
-
-    .rune-circle-overlay::after {
-        width: 230px;
-        height: 230px;
-    }
+    /* Removed fixed rune-circle-overlay rules to allow dynamic % sizing from main CSS */
 
     .arcane-nav {
         flex-direction: column;
@@ -949,16 +959,4 @@ footer {
 
 .cert-preview img:hover {
     transform: scale(1.02);
-}
-
-.rune-circle-overlay {
-    width: 240px;
-    height: 240px;
-    top: -20px;
-    left: -20px;
-}
-
-.rune-circle-overlay::after {
-    width: 260px;
-    height: 260px;
 }
