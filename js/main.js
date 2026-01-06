@@ -93,4 +93,29 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
         observer.observe(el);
     });
+    // --- Certificate Lightbox ---
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+    const closeBtn = document.getElementsByClassName("close-modal")[0];
+
+    document.querySelectorAll('.cert-preview img').forEach(img => {
+        img.addEventListener('click', function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        });
+    });
+
+    // Close on X
+    if (closeBtn) {
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        }
+    }
+
+    // Close on click outside
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });
