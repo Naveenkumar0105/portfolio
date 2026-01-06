@@ -419,15 +419,22 @@ h3 {
 }
 
 .card-back {
-    background: var(--bg-primary);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    /* Deep Royal/Teal Blue Gradient */
+    /* Actually let's go with a cleaner Royal Blue as requested */
+    background: linear-gradient(135deg, #141E30, #243B55);
+    /* Royal Navy */
     transform: rotateY(180deg);
     border: 1px solid var(--accent-gold);
+    box-shadow: 0 0 15px rgba(176, 141, 85, 0.1);
 }
 
 .card-back p {
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
-    color: var(--text-secondary);
+    color: var(--accent-gold);
+    /* Golden Words */
+    font-weight: 500;
 }
 
 .tech-stack {
@@ -440,35 +447,49 @@ h3 {
 
 .tech-stack span {
     font-size: 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1);
     padding: 3px 8px;
     border-radius: 4px;
+    color: #fff;
+    /* White text on pills for contrast against blue */
+    /* Or stick to gold? User said "Golden Words". */
     color: var(--accent-gold);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
 .cert-preview {
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.5);
     padding: 1rem;
     border-radius: 4px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    /* Keep preview light/white for the image visibility */
     width: 80%;
     margin-bottom: 1rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-small {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--text-muted);
-    color: var(--text-primary);
-    text-decoration: none;
+    background: var(--accent-gold);
+    /* Solid Gold for visibility */
+    color: #fff;
+    /* White text */
+    border: none;
+    border-radius: 4px;
     font-size: 0.8rem;
-    transition: all 0.2s;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
 }
 
 .btn-small:hover {
-    border-color: var(--accent-gold);
-    color: var(--accent-gold);
+    background: var(--accent-gold-dim);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(176, 141, 85, 0.4);
 }
 
 
@@ -821,6 +842,24 @@ footer {
         height: 100px;
     }
 
+    .profile-container {
+        width: 200px;
+        height: 200px;
+        margin-top: 2rem;
+    }
+
+    .rune-circle-overlay {
+        width: 220px;
+        height: 220px;
+        top: -10px;
+        left: -10px;
+    }
+
+    .rune-circle-overlay::after {
+        width: 230px;
+        height: 230px;
+    }
+
     .arcane-nav {
         flex-direction: column;
         padding: 1rem;
@@ -922,5 +961,4 @@ footer {
 .rune-circle-overlay::after {
     width: 260px;
     height: 260px;
-}
 }
