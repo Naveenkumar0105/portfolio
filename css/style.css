@@ -42,6 +42,16 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    /* "Snappy" scrolling */
+}
+
+/* Ensure sections snap to start */
+section,
+footer {
+    scroll-snap-align: start;
+    scroll-margin-top: 2rem;
+    /* Little buffer */
 }
 
 body {
