@@ -1,7 +1,15 @@
 /* Particles.js Configuration for "Magical Ether" */
-/* Dynamic Particle Count for Mobile */
-const isMobile = window.innerWidth < 768;
-const particleCount = isMobile ? 12 : 30; // Reduce to 12 on mobile, 30 on desktop
+/* Dynamic Particle Count based on Screen Width */
+const width = window.innerWidth;
+let particleCount = 25; // Default Desktop (Reduced from 30)
+
+if (width < 480) {
+  particleCount = 6; // Minimalist for small screens
+} else if (width < 768) {
+  particleCount = 10; // Mobile
+} else if (width < 1024) {
+  particleCount = 18; // Tablet
+}
 
 particlesJS("particles-js", {
   "particles": {
