@@ -118,4 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = "none";
         }
     }
+    // --- Hero Blue Mode Hover (Robust JS Fallback) ---
+    const heroName = document.querySelector('.hero-content h1');
+    if (heroName) {
+        heroName.addEventListener('mouseenter', () => {
+            document.body.classList.add('blue-mode');
+        });
+        heroName.addEventListener('mouseleave', () => {
+            document.body.classList.remove('blue-mode');
+        });
+    }
 });
