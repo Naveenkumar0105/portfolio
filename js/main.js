@@ -128,4 +128,37 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('blue-mode');
         });
     }
+    // --- Expandable Projects ---
+    const viewMoreBtn = document.getElementById('view-more-projects');
+    // Select hidden projects once (static list) so we can toggle them back later
+    const hiddenProjects = document.querySelectorAll('.project-hidden');
+
+    if (viewMoreBtn) {
+        viewMoreBtn.addEventListener('click', () => {
+            const isExpanded = viewMoreBtn.getAttribute('data-expanded') === 'true';
+
+            if (!isExpanded) {
+                // Expand: Show all hidden projects
+                hiddenProjects.forEach(project => {
+                    project.style.display = 'block';
+                    // Trigger reflow for animation
+                    void project.offsetWidth;
+                    project.classList.add('fade-in');
+                });
+                viewMoreBtn.textContent = 'View Less Projects';
+                viewMoreBtn.setAttribute('data-expanded', 'true');
+            } else {
+                // Collapse: Hide them again
+                hiddenProjects.forEach(project => {
+                    project.style.display = 'none';
+                    project.classList.remove('fade-in');
+                });
+                viewMoreBtn.textContent = 'View More Projects';
+                viewMoreBtn.setAttribute('data-expanded', 'false');
+
+                // Scroll back to projects section so user isn't lost
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 });
