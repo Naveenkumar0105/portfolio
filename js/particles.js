@@ -83,7 +83,7 @@ particlesJS("particles-js", {
         "mode": "bubble" /* Bubble makes them grow/glow. Repulse moves them. Let's combine or choose one. User wanted movement. Repulse is best for movement. */
       },
       "onclick": {
-        "enable": true,
+        "enable": false,
         "mode": "push"
       },
       "resize": true
