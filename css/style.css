@@ -54,6 +54,10 @@ footer {
     /* Little buffer */
 }
 
+#hero {
+    scroll-margin-top: 0 !important;
+}
+
 body {
     /* Base: Light Theme Gradient */
     background: radial-gradient(circle at center, var(--bg-secondary) 0%, var(--bg-primary) 100%);
@@ -188,7 +192,7 @@ h3 {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 60px;
+    width: 140px;
     height: 3px;
     background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
 }
@@ -277,7 +281,7 @@ h3 {
     position: relative;
     transition: color 0.3s ease;
     display: inline-block;
-    min-width: 80px;
+    min-width: 140px;
     text-align: center;
 }
 
@@ -288,13 +292,15 @@ h3 {
 /* Hero Section */
 .hero-section {
     height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
-    padding: 0 2rem;
+    padding: 3.5rem 1.5rem 1.5rem;
+    box-sizing: border-box;
 }
 
 /* Expandable Projects */
@@ -326,47 +332,58 @@ h3 {
     top: 0;
     left: 0;
     z-index: -1;
-    z-index: -1;
     /* Background moved to body::before for smooth transition */
 }
 
 
 
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    width: 100%;
+    margin-top: 1rem;
+}
+
 .hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: fadeInDown 1.5s ease-out;
+    font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+    margin-bottom: 0.6rem;
+    animation: fadeInDown 0.8s ease-out forwards;
     transition: all 0.5s ease;
     /* Smooth return from hover */
 }
 
 .hero-content .subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
     font-family: var(--font-subheading);
     color: var(--text-secondary);
-    margin-bottom: 2rem;
-    animation: fadeInUp 1.5s ease-out 0.5s backwards;
+    margin-bottom: 0.8rem;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .hero-divider {
-    width: 100px;
+    width: 140px;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
-    margin: 0 auto 1.5rem;
+    margin: 0.6rem auto 1rem;
 }
 
 .tagline {
     font-style: italic;
     color: var(--accent-gold);
-    margin-bottom: 3rem;
-    opacity: 0.8;
+    margin-bottom: 1.8rem;
+    opacity: 0.85;
+    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .cta-group {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     justify-content: center;
-    animation: fadeInUp 1.5s ease-out 1s backwards;
+    animation: fadeInUp 0.8s ease-out forwards;
 }
 
 /* Section Container */
@@ -1060,4 +1077,275 @@ footer {
 
 .cert-preview img:hover {
     transform: scale(1.02);
+}
+
+/* Enhanced Card Back Scroll & Content Styling */
+.card-back {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 1.25rem !important;
+    text-align: center;
+}
+
+.card-back h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+    color: #ffffff;
+}
+
+.card-back p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 1rem;
+    color: var(--accent-gold);
+    max-width: 95%;
+}
+
+.card-award {
+    display: inline-block;
+    color: #ffe082;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+.card-front h3 {
+    font-size: 1.45rem;
+}
+
+/* 3D Snitch Canvas */
+#snitch-canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    pointer-events: none;
+    z-index: 1; /* Floating in background, behind project cards & tiles */
+    display: block !important;
+}
+
+/* Ensure only cards and tiles sit above the flying snitch */
+.project-card,
+.achievement-card,
+.experience-card,
+.card-inner,
+.profile-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* --- SNITCH UI ELEMENTS --- */
+.snitch-hud {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: rgba(26, 37, 47, 0.9);
+    border: 1px solid var(--accent-gold);
+    color: var(--bg-tertiary);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: var(--glow-gold);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.snitch-hud.visible {
+    transform: translateX(-50%) translateY(0);
+}
+
+.snitch-hud-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.snitch-hud-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+/* Snitch Dock (Bottom Right) */
+.snitch-dock {
+    position: fixed;
+    bottom: 60px;
+    right: 65px;
+    width: 100px;
+    height: 100px;
+    z-index: 999; /* Below the 3D snitch which is z-index 1000 now, or keep dock higher but transparent */
+}
+
+.snitch-dock-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(176, 141, 85, 0.6);
+    box-shadow: 0 0 20px rgba(176, 141, 85, 0.25);
+    animation: slow-spin 10s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes slow-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.snitch-dock-menu {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: rgba(26, 37, 47, 0.95);
+    border: 1px solid var(--accent-gold);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: max-content;
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    transform-origin: bottom right;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.snitch-dock:hover .snitch-dock-menu,
+.snitch-dock-menu.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.dock-btn {
+    background: none;
+    border: none;
+    color: var(--bg-primary);
+    text-align: left;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.dock-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--accent-gold-dim);
+}
+
+#btn-fly-top.hidden-at-top {
+    display: none !important;
+}
+
+/* Snitch Reward Modal */
+.snitch-modal-content {
+    background: radial-gradient(circle at top right, #1a252f, #0d1b2a);
+    border: 2px solid var(--accent-gold);
+    color: white;
+    text-align: center;
+    max-width: 500px;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+.reward-title {
+    font-family: var(--font-heading);
+    color: var(--accent-gold-dim);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.reward-subtitle {
+    font-family: var(--font-subheading);
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.reward-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.reward-ai-pitch {
+    background: rgba(255,255,255,0.05);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.close-reward-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.close-reward-modal:hover {
+    color: white;
+}
+
+.hidden { display: none !important; }
+
+#snitch-reward-modal {
+    align-items: center;
+    justify-content: center;
+}
+
+.snitch-dock-menu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+/* Subtle resting glow */
+.snitch-dock::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0) 70%);
+    border-radius: 50%;
+    animation: pulse-dock-glow 3s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes pulse-dock-glow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
 }

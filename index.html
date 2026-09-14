@@ -13,14 +13,15 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css?v=2.6">
+    <link rel="stylesheet" href="css/style.css?v=9.0">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div id="particles-js"></div>
-    <canvas id="magic-cursor"></canvas>
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
+    <canvas id="snitch-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; display: block;"></canvas>
+    <canvas id="magic-cursor" style="display: none;"></canvas>
 
     <!-- Navigation -->
     <nav class="arcane-nav">
@@ -46,14 +47,7 @@
             <p class="tagline">Turning data into intelligent systems | AI, NLP, & Deep Learning</p>
             <div class="cta-group">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
-
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <span class="mouse">
-                <span class="wheel"></span>
-            </span>
-            <span class="arrow"></span>
         </div>
     </section>
 
@@ -86,31 +80,36 @@
         </div>
     </section>
 
-    </section>
-
     <!-- Skills Section -->
     <section id="skills" class="section-container">
         <h2 class="section-title">Technical Skills</h2>
         <div class="achievements-grid"> <!-- Reusing Grid Layout -->
             <div class="achievement-card">
                 <div class="achievement-icon"><i class="fas fa-code"></i></div>
-                <h3>Programming</h3>
+                <h3>Languages</h3>
                 <div class="tech-stack" style="justify-content: center; margin-top: 1rem;">
-                    <span>Python</span><span>C</span><span>C++</span><span>C#</span><span>SQL</span><span>JavaScript</span>
+                    <span>Python</span><span>C</span><span>C++</span><span>SQL</span><span>JavaScript</span><span>TypeScript</span><span>Bash</span>
                 </div>
             </div>
             <div class="achievement-card">
                 <div class="achievement-icon"><i class="fas fa-brain"></i></div>
-                <h3>AI & Machine Learning</h3>
+                <h3>Frameworks & AI</h3>
                 <div class="tech-stack" style="justify-content: center; margin-top: 1rem;">
-                    <span>PyTorch</span><span>TensorFlow</span><span>Transformers</span><span>Scikit-learn</span><span>OpenCV</span><span>RAG</span>
+                    <span>PyTorch</span><span>TensorFlow</span><span>HuggingFace</span><span>YOLO</span><span>LangChain</span><span>LlamaIndex</span><span>FastAPI</span><span>Scikit-learn</span><span>OpenCV</span>
+                </div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon"><i class="fas fa-layer-group"></i></div>
+                <h3>Domains</h3>
+                <div class="tech-stack" style="justify-content: center; margin-top: 1rem;">
+                    <span>ML/DL</span><span>NLP</span><span>Computer Vision</span><span>Agentic AI</span><span>RAG</span><span>LLMs</span><span>Prompt Engineering</span><span>Query Optimization</span>
                 </div>
             </div>
             <div class="achievement-card">
                 <div class="achievement-icon"><i class="fas fa-tools"></i></div>
-                <h3>Tools & Cloud</h3>
+                <h3>Tools & Infra</h3>
                 <div class="tech-stack" style="justify-content: center; margin-top: 1rem;">
-                    <span>Azure</span><span>Git</span><span>Docker</span><span>Spacy</span><span>NLTK</span><span>Jupyter</span>
+                    <span>Azure</span><span>Docker</span><span>Git</span><span>PostgreSQL</span><span>MongoDB</span><span>ChromaDB</span><span>Vercel</span><span>Supabase</span><span>Linux</span><span>CI/CD</span>
                 </div>
             </div>
         </div>
@@ -129,9 +128,9 @@
                         <h3 style="font-size: 1.5rem;">University of Southern California</h3>
                         <p class="exp-role">Masters in Computer Science</p>
                         <p class="exp-location"
-                            style="margin-top: 0.5rem; color: var(--text-primary); font-weight: bold;">CGPA: 3.65 /
+                            style="margin-top: 0.5rem; color: var(--text-primary); font-weight: bold;">CGPA: 3.82 /
                             4.0</p>
-                        <p class="exp-location">Class of 2027</p>
+                        <p class="exp-location">Aug 2025 – May 2027</p>
                     </div>
                     <div class="card-back">
                         <h3>Coursework</h3>
@@ -156,26 +155,22 @@
                         <p class="exp-role">B.Tech in Computer Science and Engineering</p>
                         <p class="exp-location"
                             style="margin-top: 0.5rem; color: var(--text-primary); font-weight: bold;">CGPA: 9.3 /
-                            10</p>
-                        <p class="exp-location">Graduated 2024</p>
+                            10.0</p>
+                        <p class="exp-location">Dec 2020 – May 2024</p>
                     </div>
                     <div class="card-back">
                         <h3>Coursework</h3>
                         <div class="tech-stack" style="margin-top: 1rem; gap: 0.8rem;">
                             <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Artificial Intelligence and
                                 Expert Systems</span>
-                            <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Machine Learning</span>
-                            <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Deep Learning</span>
                             <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Soft Computing Techniques</span>
                             <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Pattern Recognition</span>
-                            <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Big Data Analytics</span>
+                            <span style="font-size: 0.9rem; padding: 0.5rem 1rem;">Big Data</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
     </section>
 
     <!-- Certifications Section -->
@@ -299,21 +294,33 @@
         </div>
     </section>
 
-    <!-- Experience Section (New) -->
+    <!-- Experience Section -->
     <section id="experience" class="section-container">
         <h2 class="section-title">Professional Experience</h2>
         <div class="experience-timeline">
-            <!-- HCL Tech -->
+            <!-- Microchip Technology -->
             <div class="experience-card achievement-card">
                 <div class="exp-header">
-                    <h3>HCL Tech</h3>
-                    <span class="exp-role">Technical Lead | Sep 2024 - July 2025</span>
+                    <h3>Microchip Technology Inc.</h3>
+                    <span class="exp-role">Intern | May 2026 – Aug 2026</span>
                 </div>
-                <p class="exp-location">Madurai, Tamil Nadu</p>
+                <p class="exp-location">Roseville, CA, USA</p>
                 <ul class="exp-details">
-                    <li>Completed full-stack training in Microsoft ecosystem (C#, .NET, Angular, SQL Server).</li>
-                    <li>Trained in Azure services (App Service, SQL Database, DevOps) and cloud migration.</li>
-                    <li>Migrated legacy corporate website (50K+ users) to Azure, reducing costs by 20%.</li>
+                    <li>Engineered a cross-platform Python GUI to interface with custom SSD firmware for Future of Memory and Storage (FMS) 2026, driving technical demonstrations of two storage technologies to 500+ clients.</li>
+                    <li>Automated PCIe/NVMe hardware benchmarking for AI workloads by writing Python scripts to stress-test evaluation boards across 1000+ iterations, identifying firmware bottlenecks and debugging complex customer edge cases.</li>
+                </ul>
+            </div>
+
+            <!-- HCL Tech -->
+            <div class="experience-card achievement-card" style="margin-top: 2rem;">
+                <div class="exp-header">
+                    <h3>HCL Tech</h3>
+                    <span class="exp-role">Technical Lead | Sep 2024 – Jul 2025</span>
+                </div>
+                <p class="exp-location">Madurai, Tamil Nadu, India</p>
+                <ul class="exp-details">
+                    <li>Trained in Microsoft Azure services, including App Service, Azure SQL Database, and Azure DevOps, gaining expertise in cloud migration and deployment pipelines.</li>
+                    <li>Contributed to migrating a legacy corporate website (50K+ monthly users) from on-premise servers to the Azure platform, improving availability and reducing infrastructure costs by an estimated 20%.</li>
                 </ul>
             </div>
 
@@ -321,13 +328,12 @@
             <div class="experience-card achievement-card" style="margin-top: 2rem;">
                 <div class="exp-header">
                     <h3>National Institute of Ocean Technology (NIOT)</h3>
-                    <span class="exp-role">ML Research Intern | May 2023 - June 2023</span>
+                    <span class="exp-role">ML Research Intern | May 2023 – Jun 2023</span>
                 </div>
                 <p class="exp-location">Chennai, India</p>
                 <ul class="exp-details">
-                    <li>Performed EDA on 1M+ meteorological data points to study ship fuel efficiency.</li>
-                    <li>Developed robust data preprocessing pipeline (CSV -> Excel, normalization).</li>
-                    <li>Analyzed ship trajectory data for optimal maritime navigation.</li>
+                    <li>Performed extensive exploratory data analysis (EDA) on 1M+ meteorological, oceanographic, and ship trajectory data points to identify key environmental factors impacting fuel efficiency and optimal navigation.</li>
+                    <li>Developed a robust data preprocessing pipeline to clean, integrate, and normalize large raw datasets (CSV-to-Excel transformation, missing value handling, feature scaling) to enable reliable downstream analysis.</li>
                 </ul>
             </div>
         </div>
@@ -338,19 +344,57 @@
         <h2 class="section-title">Projects</h2>
         <div class="projects-grid">
 
-            <!-- Kuri AI (New Featured) -->
+            <!-- VibeArchitect -->
+            <div class="project-card" data-tilt>
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h3>VibeArchitect</h3>
+                        <p class="card-tech">Gemini API • FLUX.1 • Full-Stack Agentic AI</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Agentic Content Pipeline</h3>
+                        <span class="card-award"><i class="fas fa-trophy"></i> Special Mention, TrojanHacks USC</span>
+                        <p>Automates multimodal content trend analysis and thumbnail generation using Gemini and FLUX.1 with 100% system uptime.</p>
+                        <div class="tech-stack">
+                            <span>Gemini API</span><span>HuggingFace</span><span>React</span><span>Node.js</span>
+                        </div>
+                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Project
+                            <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Vision Inference Pipeline -->
+            <div class="project-card" data-tilt>
+                <div class="card-inner">
+                    <div class="card-front">
+                        <h3>Vision Routing Engine</h3>
+                        <p class="card-tech">PyTorch • YOLOv11 • Object Detection</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>Dynamic Vision Pipeline</h3>
+                        <p>Cascades X-ray screening between NanoDet-Plus and YOLOv11L, slashing inference time by 54% while improving AP@50 by 6.9%.</p>
+                        <div class="tech-stack">
+                            <span>PyTorch</span><span>YOLOv11</span><span>NanoDet-Plus</span><span>CV</span>
+                        </div>
+                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Project
+                            <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kuri AI -->
             <div class="project-card" data-tilt>
                 <div class="card-inner">
                     <div class="card-front">
                         <h3>Kuri AI</h3>
-                        <p class="card-tech">Gemini API • NLP • Task Intelligence</p>
+                        <p class="card-tech">Multimodal LLMs • Agentic AI • Supabase</p>
                     </div>
                     <div class="card-back">
-                        <h3>LLM-Driven Task System</h3>
-                        <p>Architected an LLM-driven intelligence pipeline for intent classification and complex
-                            reasoning. Features multimodal voice/text input and automated calendar synchronization.</p>
+                        <h3>LLM Task Understanding</h3>
+                        <p>Delivers multimodal intent classification and hierarchical task scheduling with Google Calendar and Supabase serverless functions.</p>
                         <div class="tech-stack">
-                            <span>Gemini API</span><span>Python</span><span>NLP</span>
+                            <span>Gemini API</span><span>Multimodal LLMs</span><span>Supabase</span><span>Vercel</span>
                         </div>
                         <a href="https://github.com/Naveenkumar0105/kuri-ai" target="_blank" class="btn-small">View Code
                             <i class="fab fa-github"></i></a>
@@ -358,29 +402,27 @@
                 </div>
             </div>
 
-            <!-- Valorant Strategy Assistant -->
-            <div class="project-card" data-tilt>
+            <!-- Valorant Strategy Assistant (Hidden by default) -->
+            <div class="project-card project-hidden" data-tilt>
                 <div class="card-inner">
                     <div class="card-front">
                         <h3>Valorant RAG Chatbot</h3>
-                        <p class="card-tech">RAG • LLM • ChromaDB</p>
+                        <p class="card-tech">Semantic Search • ChromaDB • Mistral 7B</p>
                     </div>
                     <div class="card-back">
                         <h3>Valorant Strategy Assistant</h3>
-                        <p>Retreival-Augmented Generation system using sentence-transformers and ChromaDB. Indexed
-                            50+
-                            docs for context-aware Q&A.</p>
+                        <p>Delivers strategy-focused gaming Q&A using ChromaDB semantic retrieval and a quantized 7B Mistral LLM running 30% faster.</p>
                         <div class="tech-stack">
-                            <span>Mistral 7B</span><span>RAG</span><span>Python</span>
+                            <span>Mistral 7B</span><span>RAG</span><span>ChromaDB</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Scroll
+                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Code
                             <i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- Aerial Image to Map -->
-            <div class="project-card" data-tilt>
+            <!-- Pix2Pix Maps (Hidden by default) -->
+            <div class="project-card project-hidden" data-tilt>
                 <div class="card-inner">
                     <div class="card-front">
                         <h3>Pix2Pix Maps</h3>
@@ -388,19 +430,18 @@
                     </div>
                     <div class="card-back">
                         <h3>Aerial Image to Map</h3>
-                        <p>Implemented conditional GAN (Pix2Pix) to translate aerial imagery into cartographic maps.
-                            Validated with high-fidelity outputs.</p>
+                        <p>Translates complex aerial satellite imagery into high-fidelity cartographic map representations using conditional GANs.</p>
                         <div class="tech-stack">
-                            <span>PyTorch/TF</span><span>GANs</span><span>CV</span>
+                            <span>PyTorch</span><span>TensorFlow</span><span>GANs</span><span>CV</span>
                         </div>
                         <a href="https://github.com/Naveenkumar0105/Image-to-Image-translation-GAN-" target="_blank"
-                            class="btn-small">View Scroll
+                            class="btn-small">View Code
                             <i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- COVID-19 Classification (Hidden/Archived) -->
+            <!-- COVID-19 Classification (Hidden by default) -->
             <div class="project-card project-hidden" data-tilt>
                 <div class="card-inner">
                     <div class="card-front">
@@ -409,13 +450,11 @@
                     </div>
                     <div class="card-back">
                         <h3>COVID-19 Classification</h3>
-                        <p>Two-stage CNN pipeline for chest X-rays. Achieved 91% accuracy (Normal vs Abnormal) and
-                            96%
-                            (Disease specificity).</p>
+                        <p>Classifies chest X-rays via a two-stage deep CNN pipeline, attaining 91% abnormality accuracy and 96% disease specificity.</p>
                         <div class="tech-stack">
                             <span>CNN</span><span>Keras</span><span>Python</span>
                         </div>
-                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Scroll
+                        <a href="https://github.com/Naveenkumar0105" target="_blank" class="btn-small">View Code
                             <i class="fab fa-github"></i></a>
                     </div>
                 </div>
@@ -454,6 +493,45 @@
         </div>
     </footer>
 
+    
+    <!-- Snitch UI Elements -->
+    <div id="snitch-hud" class="snitch-hud">
+        🏆 Quidditch Seeker Mode — <span>Catch the Golden Snitch!</span>
+        <button id="cancel-snitch-btn" class="snitch-hud-btn">⏹ Rest</button>
+    </div>
+
+    <!-- The Snitch Rest Menu / Dock -->
+    <div id="snitch-dock" class="snitch-dock">
+        <div class="snitch-dock-ring"></div>
+        <div class="snitch-dock-menu">
+            <button id="btn-release-snitch" class="dock-btn">🏆 Release Snitch</button>
+            <button id="btn-quick-resume" class="dock-btn">📜 Quick Resume</button>
+            <button id="btn-fly-top" class="dock-btn">⬆️ Fly to Top</button>
+        </div>
+    </div>
+
+    <!-- The Catch Reward Modal -->
+    <div id="snitch-reward-modal" class="modal hidden">
+        <div class="modal-content snitch-modal-content">
+            <span class="close-reward-modal">&times;</span>
+            <h2 class="reward-title">Golden Snitch Caught!</h2>
+            <p class="reward-subtitle">+150 Points to your House</p>
+            <div class="reward-body">
+                <p>You've unlocked Naveen's Quick Dossier:</p>
+                <div class="reward-links">
+                    <a href="assets/resume.pdf" class="btn btn-primary" download><i class="fas fa-file-pdf"></i> Master Resume</a>
+                    <a href="mailto:narsozha@usc.edu" class="btn btn-secondary"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://linkedin.com/in/naveenkumar-narsozhan" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/Naveenkumar0105" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="reward-ai-pitch">
+                    <strong>Focus:</strong> AI, NLP, Agentic Systems & RAG
+                </div>
+            </div>
+            <button id="btn-rest-snitch" class="btn btn-secondary" style="margin-top: 1rem;">Put Snitch to Rest</button>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/particles.js"></script>
@@ -467,6 +545,11 @@
     </div>
 
     <script src="js/main.js"></script>
+
+    <!-- 3D Snitch Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="js/snitch.js?v=9.0"></script>
 </body>
 
 </html>
