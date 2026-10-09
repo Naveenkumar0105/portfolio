@@ -1,0 +1,5 @@
+export const experience = [
+  { company: 'Microchip Technology', role: 'Application Engineering Intern · SSD Software', period: 'May–Aug 2026', bullets: ['Demoed a Python CustomTkinter GUI for prototype SSD firmware over PCIe/NVMe to 500+ attendees at FMS 2026.', 'Automated 1,000+ test runs, reducing manual testing time by 30%.'], dossier: { stat: '500+', description: 'attendees at a live SSD firmware demo, FMS 2026', label: 'Microchip', section: 'experience' as const } },
+  { company: 'HCLTech', role: 'Technical Lead · Azure Application Development', period: 'Sep 2024–Jul 2025', bullets: ['Built authentication and role-based access control with C#, ASP.NET Core, and JWT.', 'Contributed to migrating an application serving 50K+ monthly users to Azure.'] },
+  { company: 'National Institute of Ocean Technology', role: 'ML Research Intern', period: '2023', bullets: ['Engineered features from 1M+ meteorological, oceanographic, and ship trajectory data points.', 'Analyzed environmental factors for fuel-efficient maritime routing.'] },
+]
