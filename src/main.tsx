@@ -27,6 +27,7 @@ function App() {
   const [showFigure, setShowFigure] = useState(false)
   const [heroVisible, setHeroVisible] = useState(true)
   const [dossierOpen, setDossierOpen] = useState(false)
+  const [snitchCaught, setSnitchCaught] = useState(false)
   const [toast, setToast] = useState(false)
   const [copied, setCopied] = useState(false)
   const [seeker, setSeeker] = useState(false)
@@ -82,15 +83,21 @@ function App() {
     return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = previousOverflow }
   }, [dossierOpen, certImage])
   useEffect(() => () => { if (toastTimer.current) clearTimeout(toastTimer.current); if (copyTimer.current) clearTimeout(copyTimer.current) }, [])
+  const focusAfterSeeker = () => {
+    const release = document.querySelector<HTMLElement>('.release-snitch')
+    const rect = release?.getBoundingClientRect()
+    const target = rect && rect.top >= 0 && rect.bottom <= innerHeight ? release : document.querySelector<HTMLElement>('.wordmark')
+    target?.focus()
+  }
   const closeModal = (focusTarget?: HTMLElement) => {
     setDossierOpen(false); setCertImage(null)
     const target = focusTarget ?? lastFocus.current
-    requestAnimationFrame(() => (target?.isConnected ? target : document.querySelector<HTMLElement>('.snitch-dock button'))?.focus())
+    requestAnimationFrame(() => target?.isConnected ? target.focus() : focusAfterSeeker())
   }
   const goToHighlight = (section: 'work'|'experience') => {
     const heading = document.getElementById(`${section}-heading`)
     closeModal(heading ?? undefined)
-    document.getElementById(section)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+    document.getElementById(section)?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   }
   const copyEmail = async () => {
     try {
@@ -100,22 +107,19 @@ function App() {
       copyTimer.current = setTimeout(() => setCopied(false), 2000)
     } catch { setCopied(false) }
   }
-  const openDossier = () => { lastFocus.current = document.activeElement as HTMLElement; setToast(false); setCopied(false); setDossierOpen(true) }
-  const startSeeker = () => {
-    const origin = heroSnitchRef.current
-    if (!origin) return
-    const rect = origin.getBoundingClientRect()
-    if (rect.top < 0 || rect.bottom > innerHeight) origin.scrollIntoView({ block: 'center', behavior: 'instant' })
-    const { x, y, width, height } = origin.getBoundingClientRect()
-    snitchStart.current = { x: (x + width / 2) / innerWidth * 100, y: (y + height / 2) / innerHeight * 100 }
+  const openDossier = () => { lastFocus.current = document.activeElement as HTMLElement; setToast(false); setCopied(false); setSnitchCaught(false); setDossierOpen(true) }
+  const startSeeker = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const { x, y, width, height } = event.currentTarget.getBoundingClientRect()
+    snitchStart.current = { x: (x + width / 2) / innerWidth * 100, y: Math.min(y + height / 2, innerHeight - 32) / innerHeight * 100 }
     setSnitch(snitchStart.current)
     setSeeker(true)
     requestAnimationFrame(() => snitchRef.current?.focus())
   }
   const catchSnitch = () => {
     if (heroSnitchRef.current) heroSnitchRef.current.style.translate = '0 0'
-    if (!sessionStorage.getItem('dossier-seen')) { sessionStorage.setItem('dossier-seen', '1'); openDossier() }
-    else { setToast(true); if (toastTimer.current) clearTimeout(toastTimer.current); toastTimer.current = setTimeout(() => setToast(false), 4000) }
+    setSeeker(false)
+    if (!sessionStorage.getItem('dossier-seen')) { sessionStorage.setItem('dossier-seen', '1'); openDossier(); setSnitchCaught(true) }
+    else { setToast(true); if (seeker) requestAnimationFrame(focusAfterSeeker); if (toastTimer.current) clearTimeout(toastTimer.current); toastTimer.current = setTimeout(() => setToast(false), 4000) }
   }
   const evadePointer = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'touch' || matchMedia('(prefers-reduced-motion: reduce)').matches || !heroSnitchRef.current) return
@@ -126,10 +130,10 @@ function App() {
   }
 
   return <>
-    <a className="skip-link" href="#work">Skip to work</a>
+    <a className="skip-link" href="#work" onClick={() => requestAnimationFrame(() => document.getElementById('work-heading')?.focus({ preventScroll: true }))}>Skip to work</a>
     <header className="site-header"><nav className="nav wrap" aria-label="Main navigation"><a className="wordmark" href="#top">{site.name.split(" ")[0]} <span>{site.name.split(" ")[1]}</span></a><div className="nav-links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a><a className="nav-resume" href={resume} download>Resume</a><button className="theme-toggle" type="button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}>{theme === 'light' ? '☾' : '☼'}</button></div></nav></header>
     <main id="top">
-      <section className="hero wrap" ref={heroRef} aria-labelledby="hero-title"><div className="hero-copy"><p className="eyebrow">{site.heroLabel}</p><h1 id="hero-title">{site.heroFirst} <em>{site.heroSecond}</em></h1><p className="hero-sub">{site.heroDescription}</p><div className="hero-links"><a href={email}>Email ↗</a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={github} target="_blank" rel="noreferrer">GitHub ↗</a><ResumeLink /></div></div><div className="figure-space"><div className="figure-frame" onPointerMove={evadePointer}>{showFigure && <Suspense fallback={null}><Figure active={heroVisible} theme={theme} /></Suspense>}<button ref={heroSnitchRef} type="button" className="hero-snitch" style={{ visibility: seeker && !dossierOpen ? 'hidden' : 'visible' }} onClick={catchSnitch} aria-label="Catch the Golden Snitch"><span className="wing left-wing"/><span className="snitch-core"/><span className="wing right-wing"/></button><div className="figure-mark" aria-hidden="true">✧</div></div><p className="figure-caption">An original little bit of magic.</p></div></section>
+      <section className="hero wrap" ref={heroRef} aria-labelledby="hero-title"><div className="hero-copy"><p className="eyebrow">{site.heroLabel}</p><h1 id="hero-title">{site.heroFirst} <em>{site.heroSecond}</em></h1><p className="hero-sub">{site.heroDescription}</p><div className="hero-links"><a href={email}>Email ↗</a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={github} target="_blank" rel="noreferrer">GitHub ↗</a><ResumeLink /></div></div><div className="figure-space"><div className="figure-frame" onPointerMove={evadePointer}>{showFigure && <Suspense fallback={null}><Figure active={heroVisible} theme={theme} /></Suspense>}<button ref={heroSnitchRef} type="button" className="hero-snitch" style={{ visibility: seeker && !dossierOpen ? 'hidden' : 'visible' }} onClick={catchSnitch} aria-label="Catch the Golden Snitch"><span className="wing left-wing"/><span className="snitch-core"/><span className="wing right-wing"/></button><div className="figure-mark" aria-hidden="true">✧</div></div><div className="figure-meta"><p className="figure-caption">An original little bit of magic.</p>{!seeker && <button type="button" className="release-snitch" onClick={startSeeker}><span className="snitch-glyph" aria-hidden="true">✦</span> Release Snitch</button>}</div></div></section>
       <div className="wrap"><section id="work" className="section" aria-labelledby="work-heading"><SectionLabel id="work">Work</SectionLabel><p className="section-intro">{site.workIntro}</p><div className="project-list">{projects.map((p, i) => <details className="project-row" key={p.title}><summary><span className="index">{String(i+1).padStart(2,'0')}</span><span className="project-main"><strong>{p.title}</strong><span className="project-result">{p.result}</span></span><span className="project-year">{p.year}</span><span className="expand-mark" aria-hidden="true">+</span></summary><div className="project-detail"><p><b>Problem</b>{p.problem}</p><p><b>Approach</b>{p.approach}</p><p><b>Result</b>{p.outcome}</p><div className="project-bottom"><span>{p.tech.join(' · ')}</span>{p.url && <a href={p.url} target="_blank" rel="noreferrer">View repository ↗</a>}</div></div></details>)}</div><a className="text-link more-link" href={github} target="_blank" rel="noreferrer">View More Projects ↗</a></section>
       <section id="experience" className="section" aria-labelledby="experience-heading"><SectionLabel id="experience">Experience</SectionLabel><div className="experience-list">{experience.map(e => <article className="experience-row" key={e.company}><div><h3>{e.company}</h3><p>{e.role}</p></div><div><span className="period">{e.period}</span><ul>{e.bullets.map(b => <li key={b}>{b}</li>)}</ul></div></article>)}</div></section>
       <section id="skills" className="section" aria-labelledby="skills-heading"><SectionLabel id="skills">Skills</SectionLabel><div className="simple-list">{skills.map(s => <div className="simple-row" key={s.label}><h3>{s.label}</h3><p>{s.items}</p></div>)}</div></section>
@@ -138,12 +142,11 @@ function App() {
       </div>
     </main>
     <footer id="contact" className="footer"><div className="wrap"><SectionLabel id="contact">Contact</SectionLabel><h2>{site.contactHeadline}</h2><p className="contact-intro">{site.contactDescription}</p><div className="footer-links"><a href={email}>{site.email} ↗</a><a href={site.phoneHref}>{site.phoneDisplay} ↗</a><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={github} target="_blank" rel="noreferrer">GitHub ↗</a><ResumeLink /></div><p className="location">{site.location}</p><div className="footer-bottom"><span>© 2026 {site.name}</span><span>{site.quote}</span></div></div></footer>
-    <div className="snitch-dock" aria-label="Quidditch Seeker Mode">{!seeker && <button type="button" onClick={startSeeker}><span className="snitch-glyph" aria-hidden="true">✦</span> Release Snitch</button>}<button type="button" onClick={openDossier}>Quick Resume</button></div>
-    {seeker && <div className="seeker-hud"><span>Quidditch Seeker Mode · Catch the Golden Snitch</span><button type="button" onClick={() => setSeeker(false)}>Rest Snitch</button></div>}
+    {seeker && <div className="seeker-hud"><span>Quidditch Seeker Mode · Catch the Golden Snitch</span><button type="button" onClick={() => { setSeeker(false); requestAnimationFrame(focusAfterSeeker) }}>Rest Snitch</button></div>}
     {seeker && <button ref={snitchRef} className="flying-snitch" hidden={dossierOpen} style={{ left: `${snitch.x}%`, top: `${snitch.y}%` }} type="button" aria-label="Catch the Golden Snitch" onClick={catchSnitch}><span className="wing left-wing"/><span className="snitch-core"/><span className="wing right-wing"/></button>}
     {toast && !dossierOpen && <div className="snitch-toast" role="status"><span>{site.dossier.toast}</span><button type="button" onClick={openDossier}>{site.dossier.open}</button></div>}
-    {dossierOpen && <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) closeModal() }}><div className="dialog" role="dialog" aria-modal="true" aria-labelledby="reward-heading"><div className="dossier-top"><p className="eyebrow">{site.dossier.label}</p><button ref={closeRef} className="close" type="button" onClick={() => closeModal()} aria-label="Close dossier">×</button></div><h2 id="reward-heading">{site.dossier.headline.split('+150')[0]}<span className="points-shimmer">+150</span>{site.dossier.headline.split('+150')[1]}</h2><div className="dossier-identity"><h3>{site.name}</h3><p>{site.dossier.graduation}</p><p>{site.dossier.seeking}</p></div><p className="eyebrow dossier-label">{site.dossier.highlightsLabel}</p><div className="dossier-highlights">{dossierHighlights.map(item => <a href={`#${item.section}`} className="dossier-highlight" key={item.label} onClick={event => { event.preventDefault(); goToHighlight(item.section) }}><span className="dossier-stat">{item.stat}</span><span className="dossier-description">{item.description}</span><span className="dossier-target">{item.label} <span aria-hidden="true">↗</span></span></a>)}</div><div className="dossier-actions"><ResumeLink className="dossier-resume" /><div className="dossier-social"><div className="dossier-email"><a href={`mailto:${site.email}?subject=${encodeURIComponent(site.dossier.mailSubject)}`}>Email</a><button type="button" onClick={copyEmail} aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V4H4v12h4"/></svg></button></div><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={github} target="_blank" rel="noreferrer">GitHub ↗</a></div><span className="copy-status" aria-live="polite">{copied ? 'Copied ✓' : ''}</span></div><div className="dossier-footer"><button type="button" onClick={() => closeModal()}>{site.dossier.keepExploring}</button><button type="button" onClick={() => { setSeeker(false); closeModal(document.querySelector<HTMLElement>('.snitch-dock button') ?? undefined) }}>{site.dossier.rest}</button></div></div></div>}
-    {certImage && <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) closeModal() }}><div className="certificate-dialog" role="dialog" aria-modal="true" aria-label="Certificate preview"><button ref={closeRef} className="close" type="button" onClick={() => closeModal()} aria-label="Close certificate preview">×</button><img src={certImage} alt="Certificate preview" /></div></div>}
+    {dossierOpen && <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) closeModal() }}><div className="dialog" role="dialog" aria-modal="true" aria-labelledby="reward-heading"><div className="dossier-top"><p className="eyebrow">{site.dossier.label}</p><button ref={closeRef} className="close" type="button" onClick={() => closeModal()} aria-label="Close dossier">×</button></div><h2 id="reward-heading">{snitchCaught ? <>{site.dossier.headline.split('+150')[0]}<span className="points-shimmer">+150</span>{site.dossier.headline.split('+150')[1]}</> : site.dossier.quickHeadline}</h2><div className="dossier-identity"><h3>{site.name}</h3><p>{site.dossier.graduation}</p><p>{site.dossier.seeking}</p></div><p className="eyebrow dossier-label">{site.dossier.highlightsLabel}</p><div className="dossier-highlights">{dossierHighlights.map(item => <a href={`#${item.section}`} className="dossier-highlight" key={item.label} onClick={event => { event.preventDefault(); goToHighlight(item.section) }}><span className="dossier-stat">{item.stat}</span><span className="dossier-description">{item.description}</span><span className="dossier-target">{item.label} <span aria-hidden="true">↗</span></span></a>)}</div><div className="dossier-actions"><ResumeLink className="dossier-resume" /><div className="dossier-social"><div className="dossier-email"><a href={`mailto:${site.email}?subject=${encodeURIComponent(site.dossier.mailSubject)}`}>Email</a><button type="button" onClick={copyEmail} aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V4H4v12h4"/></svg></button></div><a href={linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={github} target="_blank" rel="noreferrer">GitHub ↗</a></div><span className="copy-status" aria-live="polite">{copied ? 'Copied ✓' : ''}</span></div><div className="dossier-footer"><button type="button" onClick={() => closeModal()}>{site.dossier.keepExploring}</button></div></div></div>}
+    {certImage && <div className="modal-backdrop" onMouseDown={e => { if (e.target === e.currentTarget) closeModal() }}><div className="certificate-dialog" role="dialog" aria-modal="true" aria-label="Certificate preview"><button ref={closeRef} className="close" type="button" onClick={() => closeModal()} aria-label="Close certificate preview">×</button><img src={certImage} alt="Certificate preview" /><a className="full-certificate" href={certImage} target="_blank" rel="noreferrer">Open full size ↗</a></div></div>}
   </>
 }
 

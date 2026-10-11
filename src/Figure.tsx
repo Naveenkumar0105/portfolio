@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 
-const modelUrl = new URL('../assets/naveen-portfolio.glb', import.meta.url).href
+const modelUrl = `${import.meta.env.BASE_URL}assets/naveen-portfolio.glb`
 
 export default function Figure({ active, theme }: { active: boolean; theme: 'light' | 'dark' }) {
   const mount = useRef<HTMLDivElement>(null)
