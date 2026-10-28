@@ -41,6 +41,7 @@ Important interactions:
 - The hero figure is lazy-loaded and activated near the viewport. Pointer movement controls its head; reduced-motion users receive a static presentation.
 - Project rows use native `<details>` elements.
 - Section headings and content rows reveal once as they enter the viewport; reduced-motion users receive content without entrance motion.
+- A thin gold line beneath the sticky navigation tracks document scroll progress with a native CSS scroll timeline.
 - Certificate thumbnails open an accessible image-preview dialog.
 - Releasing and catching the Snitch opens the Quick Dossier; later catches show a toast. Dossier highlights link back to Work or Experience.
 - Dialog logic locks background scrolling, handles Escape and Tab focus containment, and returns focus when closed.
