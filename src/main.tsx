@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { projects } from './data/projects'
 import { experience } from './data/experience'
@@ -46,6 +46,17 @@ function App() {
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => { setHeroVisible(entry.isIntersecting); if (entry.isIntersecting) setShowFigure(true) }, { rootMargin: '150px' })
     if (heroRef.current) observer.observe(heroRef.current)
+    return () => observer.disconnect()
+  }, [])
+  useLayoutEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const items = document.querySelectorAll<HTMLElement>('.section-heading,.section-intro,.project-row,.experience-row,.simple-row,.cert-row,.more-link,.footer h2,.contact-intro,.footer-links,.location')
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return
+      entry.target.classList.add('is-visible')
+      observer.unobserve(entry.target)
+    }), { rootMargin: '0px 0px -10%', threshold: .08 })
+    items.forEach(item => { item.classList.add('scroll-reveal'); observer.observe(item) })
     return () => observer.disconnect()
   }, [])
   useEffect(() => {
